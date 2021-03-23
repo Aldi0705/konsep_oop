@@ -33,6 +33,10 @@
       <input type="text" class="form-control" name="name" placeholder="Enter name" required="">
     </div>
     <div class="form-group">
+      <label for="nik">Name:</label>
+      <input type="number" class="form-control" name="nik" placeholder="Enter nik" required="">
+    </div>
+    <div class="form-group">
       <label for="email">Email address:</label>
       <input type="email" class="form-control" name="email" placeholder="Enter email" required="">
     </div>
@@ -46,7 +50,7 @@
     </div>
     <div class="form-group">
       <label for="rule">Rule:</label>
-        <select>
+        <select name="rule" require="">
 			<option>Admin</option>
 			<option>Petugas</option>
 			<option>Masyarakat</option>
@@ -59,7 +63,7 @@
     <div class="form-group">
       <label for="bod">Alamat</label>
       <br>
-      <textarea name="tipe-atextarea" require=""></textarea>
+      <textarea name="address" require=""></textarea>
     </div>
     <input type="submit" name="submit" class="btn btn-primary" style="float:right;" value="Submit">
   </form>

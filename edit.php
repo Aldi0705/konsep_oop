@@ -36,15 +36,23 @@
   <form action="edit.php" method="POST">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" class="form-control" name="uname" value="<?php echo $customer['name']; ?>" required="">
+      <input type="text" class="form-control" name="name" value="<?php echo $customer['name']; ?>" required="">
     </div>
     <div class="form-group">
       <label for="email">Email address:</label>
-      <input type="email" class="form-control" name="uemail" value="<?php echo $customer['email']; ?>" required="">
+      <input type="email" class="form-control" name="email" value="<?php echo $customer['email']; ?>" required="">
     </div>
     <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" class="form-control" name="upname" value="<?php echo $customer['username']; ?>" required="">
+      <label for="password">pass:</label>
+      <input type="text" class="form-control" name="password" value="">
+    </div>
+    <div class="form-group">
+      <label for="rule">Rule:</label>
+        <select name="rule" >
+          <option value="Admin" <?php echo $customer['rule'] === 'Admin'? 'selected' : '' ?>>Admin</option>
+          <option value="Petugas" <?php echo $customer['rule'] === 'Petugas'? 'selected' : '' ?>>Petugas</option>
+          <option value="Masyarakat" <?php echo $customer['rule'] === 'Masyarakat'? 'selected' : '' ?>>Masyarakat</option>
+        </select>
     </div>
     <div class="form-group">
       <input type="hidden" name="id" value="<?php echo $customer['id']; ?>">

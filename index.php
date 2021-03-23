@@ -55,20 +55,29 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Nik</th>
         <th>Email</th>
+        <th>No.Telp</th>
         <th>Rule</th>
+        <th>Tanggal Lahir</th>
+        <th>Alamat</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
         <?php 
-          $customers = $customerObj->displayData(); 
-          foreach ($customers as $customer){
+          $customers = $customerObj->displayData();
+          if (!is_null($customers)) {
+            foreach ($customers as $customer){
         ?>
         <tr>
           <td><?php echo $customer['name'] ?></td>
+          <td><?php echo $customer['nik'] ?></td>
           <td><?php echo $customer['email'] ?></td>
-          <td><?php echo $customer['username'] ?></td>
+          <td><?php echo $customer['telp'] ?></td>
+          <td><?php echo $customer['rule'] ?></td>
+          <td><?php echo $customer['bod'] ?></td>
+          <td><?php echo $customer['address'] ?></td>
           <td>
             <a href="edit.php?editId=<?php echo $customer['id'] ?>" style="color:green">
               <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
@@ -76,6 +85,11 @@
               <i class="fa fa-trash" aria-hidden="true"></i>
             </a>
           </td>
+        </tr>
+      <?php } ?>
+      <?php } else { ?>
+        <tr>
+          <td colspan="8">Tidak ada untuk saat ini.</td>
         </tr>
       <?php } ?>
     </tbody>
