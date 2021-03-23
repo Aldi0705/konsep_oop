@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>PHP: CRUD (Add, Edit, Delete, View) Application using OOP (Object Oriented Programming) and MYSQL</title>
+  <title>CRUD Complaint</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <body>
 
 <div class="card text-center" style="padding:15px;">
-  <h4>CRUD</h4>
+  <h4>CRUD Complaint</h4>
 </div><br> 
 
 <div class="container">
@@ -37,29 +37,12 @@
       <input type="email" class="form-control" name="email" placeholder="Enter email" required="">
     </div>
     <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" name="username" placeholder="Enter username" required="">
+    </div>
+    <div class="form-group">
       <label for="password">Password:</label>
-      <input type="text" class="form-control" name="password" placeholder="Enter password" required="">
-    </div>
-    <div class="form-group">
-      <label for="telp">No. Telp:</label>
-      <input type="number" class="form-control" name="telp" placeholder="Enter password" required="">
-    </div>
-    <div class="form-group">
-      <label for="rule">Rule:</label>
-        <select>
-			<option>Admin</option>
-			<option>Petugas</option>
-			<option>Masyarakat</option>
-        </select>
-    </div>
-    <div class="form-group">
-      <label for="bod">Tanggal Lahir</label>
-      <input type="date" class="form-control" name="bod" required="">
-    </div>
-    <div class="form-group">
-      <label for="bod">Alamat</label>
-      <br>
-      <textarea name="tipe-atextarea" require=""></textarea>
+      <input type="password" class="form-control" name="password" placeholder="Enter password" required="">
     </div>
     <input type="submit" name="submit" class="btn btn-primary" style="float:right;" value="Submit">
   </form>

@@ -25,9 +25,12 @@
 		{
 			$name = $this->con->real_escape_string($_POST['name']);
 			$email = $this->con->real_escape_string($_POST['email']);
-			$username = $this->con->real_escape_string($_POST['username']);
-			$password = $this->con->real_escape_string(md5($_POST['password']));
-			$query="INSERT INTO customers(name,email,username,password) VALUES('$name','$email','$username','$password')";
+			$username = $this->con->real_escape_string($_POST['password']);
+			$password = $this->con->real_escape_string(md5($_POST['telp']));
+			$rule = $this->con->real_escape_string(md5($_POST['rule']));
+			$bod = $this->con->real_escape_string(md5($_POST['bod']));
+			$address = $this->con->real_escape_string(md5($_POST['address']));
+			$query="INSERT INTO customers(name,email,password,telp,rule,bod,address) VALUES('$name','$email','$password','$telp','$rule','$bod','$address')";
 			$sql = $this->con->query($query);
 			if ($sql==true) {
 			    header("Location:index.php?msg1=insert");
@@ -70,10 +73,10 @@
 		{
 		    $name = $this->con->real_escape_string($_POST['uname']);
 		    $email = $this->con->real_escape_string($_POST['uemail']);
-		    $username = $this->con->real_escape_string($_POST['upname']);
+		    $username = $this->con->real_escape_string($_POST['uppass']);
 		    $id = $this->con->real_escape_string($_POST['id']);
 		if (!empty($id) && !empty($postData)) {
-			$query = "UPDATE customers SET name = '$name', email = '$email', username = '$username' WHERE id = '$id'";
+			$query = "UPDATE customers SET name = '$name', email = '$email'WHERE id = '$id'";
 			$sql = $this->con->query($query);
 			if ($sql==true) {
 			    header("Location:index.php?msg2=update");
