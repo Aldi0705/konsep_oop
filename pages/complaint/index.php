@@ -1,7 +1,7 @@
 <?php
   
   // Include database file
-  include 'custumers.php';
+  include 'app/Controller/complaint.php';
 
   $customerObj = new Customers();
 
@@ -11,20 +11,10 @@
       $customerObj->deleteRecord($deleteId);
   }
      
-?> 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>CRUD USER</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-</head>
-<body>
+?>
 
 <div class="card text-center" style="padding:15px;">
-  <h4>View Admin</h4>
+  <h4 style="text-transform: capitalize;">View <?php echo $_GET['page']; ?></h4>
 </div><br><br> 
 
 <div class="container">
@@ -81,7 +71,3 @@
     </tbody>
   </table>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
