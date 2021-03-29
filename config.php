@@ -2,12 +2,20 @@
 $page = (isset($_GET['page']))? $_GET['page'] : '';
 switch($page){
   case 'user': // $page == home (jika isi dari $page adalah home)
-  include "pages/user/index.php"; // load file home.php yang ada di folder views
+  include "user/index.php"; // load file home.php yang ada di folder views
+  break;
+  case 'user-create': // $page == home (jika isi dari $page adalah home)
+    include "user/add.php"; // load file home.php yang ada di folder views
+  break;
+  case 'user-update': // $page == home (jika isi dari $page adalah home)
+    include "user/edit.php"; // load file home.php yang ada di folder views
   break;
   case 'complaint': // $page == home (jika isi dari $page adalah home)
-    include "pages/complaint/index.php"; // load file home.php yang ada di folder views
+    include "complaint/index.php"; // load file home.php yang ada di folder views
   break;
-  
+  case 'complaint-create': // $page == home (jika isi dari $page adalah home)
+    include "complaint/add.php"; // load file home.php yang ada di folder views
+  break;
   // case 'case_selanjutnya':
   // include "views/case_selanjutnya.php";
   // break;

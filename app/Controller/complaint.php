@@ -1,6 +1,6 @@
 <?php
 
-	class Customers
+	class complaint
 	{
 		private $servername = "localhost";
 		private $username   = "root";
@@ -23,15 +23,10 @@
 		// Insert customer data into customer table
 		public function insertData($post)
 		{
-			$name = $this->con->real_escape_string($_POST['name']);
-			$nik = $this->con->real_escape_string($_POST['nik']);
-			$email = $this->con->real_escape_string($_POST['email']);
-			$password = $this->con->real_escape_string(md5($_POST['password']));
-			$telp = $this->con->real_escape_string($_POST['telp']);
-			$rule = $this->con->real_escape_string($_POST['rule']);
-			$bod = $this->con->real_escape_string($_POST['bod']);
-			$address = $this->con->real_escape_string($_POST['address']);
-			$query="INSERT INTO customers(name,nik,email,password,telp,rule,bod,address) VALUES('$name','$nik','$email','$password','$telp','$rule','$bod','$address')";
+			$cus = $this->con->real_escape_string($_POST['customer_nik']);
+			$foto = $this->con->real_escape_string($_POST['foto']);
+			$description = $this->con->real_escape_string($_POST['description']);
+			$query="INSERT INTO complaint(custumers_id,foto,description) VALUES('$cus','$foto','$description')";
 			$sql = $this->con->query($query);
 			if ($sql==true) {
 			    header("Location:index.php?msg1=insert");
@@ -43,7 +38,7 @@
 		// Fetch customer records for show listing
 		public function displayData()
 		{
-		    $query = "SELECT cs.id as customer_id, cs.name as customer_name, cs.nik as customer_nik, cp.* FROM complaint cp Join customers cs on  cp.customers_id = cs.id";
+		    $query = "SELECT cs.id as customer_id, cs.name as customer_name, cs.nik as customer_nik, cp.* FROM complaint cp Join customers cs on  cp.custumers_id = cs.id";
 		    $result = $this->con->query($query);
 			if ($result->num_rows > 0) {
 				$data = array();
@@ -59,7 +54,7 @@
 		// Fetch single data for edit from customer table
 		public function displyaRecordById($id)
 		{
-		    $query = "SELECT * FROM customers WHERE id = '$id'";
+		    $query = "SELECT * FROM complaint WHERE id = '$id'";
 		    $result = $this->con->query($query);
 			if ($result->num_rows > 0) {
 				$row = $result->fetch_assoc();
@@ -72,24 +67,17 @@
 		// Update customer data into customer table
 		public function updateRecord($postData)
 		{
-		    $name = $this->con->real_escape_string($_POST['name']);
-		    $email = $this->con->real_escape_string($_POST['email']);
-			if (isset($_POST['password']) && $_POST['password'] !== '') {
-				$password = $this->con->real_escape_string(md5($_POST['password']));
-				$query = "UPDATE customers SET name = '$name', email = '$email', password = '$password', rule = '$rule' WHERE id = '$id'";
-				$sql = $this->con->query($query);
-			} else {
-				$query = "UPDATE customers SET name = '$name', email = '$email', rule = '$rule' WHERE id = '$id'";
-				$sql = $this->con->query($query);
-			}
-			$rule = $this->con->real_escape_string($_POST['rule']);
+		    $foto = $this->con->real_escape_string($_POST['foto']);
+		    $description = $this->con->real_escape_string($_POST['description']);
 		    $id = $this->con->real_escape_string($_POST['id']);
 			if (!empty($id) && !empty($postData)) {
-				if ($sql==true) {
-					header("Location:index.php?msg2=update");
-				} else{
-					echo "Registration updated failed try again!";
-				}
+			$query = "UPDATE complaint SET foto = '$foto', description = '$description' WHERE id = '$id'";
+			$sql = $this->con->query($query);
+			if ($sql==true) {
+			    header("Location:index.php?msg2=update");
+			}else{
+			    echo "Registration updated failed try again!";
+			}
 		    }
 			
 		}
@@ -98,7 +86,7 @@
 		// Delete customer data from customer table
 		public function deleteRecord($id)
 		{
-		    $query = "DELETE FROM customers WHERE id = '$id'";
+		    $query = "DELETE FROM complaint WHERE id = '$id'";
 		    $sql = $this->con->query($query);
 				if ($sql==true) {
 					header("Location:index.php?msg3=delete");

@@ -34,7 +34,7 @@
 			$query="INSERT INTO customers(name,nik,email,password,telp,rule,bod,address) VALUES('$name','$nik','$email','$password','$telp','$rule','$bod','$address')";
 			$sql = $this->con->query($query);
 			if ($sql==true) {
-			    header("Location:index.php?msg1=insert");
+			    header("Location:index.php?page=user");
 			}else{
 			    echo "Registration failed try again!";
 			}
@@ -100,11 +100,11 @@
 		{
 		    $query = "DELETE FROM customers WHERE id = '$id'";
 		    $sql = $this->con->query($query);
-				if ($sql==true) {
-					header("Location:index.php?msg3=delete");
-				} else{
-					echo "Record does not delete try again";
-				}
+			if ($sql==true) {
+				header("Location:index.php?page=user");
+			} else{
+				echo "Record does not delete try again";
+			}
 		}
 
 	}
