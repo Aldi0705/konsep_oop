@@ -13,7 +13,10 @@
 		public function __construct()
 		{
 		    $this->con = new mysqli($this->servername, $this->username,$this->password,$this->database);
-		    if(mysqli_connect_error()) {
+			// var_dump($this->con->error);
+			// exit;
+		    if($this->con->connect_errno) {
+				echo 'tet';
 				trigger_error("Failed to connect to MySQL: " . mysqli_connect_error());
 		    }else{
 				return $this->con;
@@ -24,12 +27,21 @@
 		public function insertData($post)
 		{
 			$cus = $this->con->real_escape_string($_POST['customer_nik']);
-			$foto = $this->con->real_escape_string($_POST['foto']);
+			$target_dir = "assets/uploads/";
 			$description = $this->con->real_escape_string($_POST['description']);
-			$query="INSERT INTO complaint(custumers_id,foto,description) VALUES('$cus','$foto','$description')";
-			$sql = $this->con->query($query);
+			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			
+			$query="INSERT INTO complaint(custumers_id,foto,description) VALUES(3,'$target_file','$description')";
+			$check = getimagesize($_FILES["foto"]["tmp_name"]);
+			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {
-			    header("Location:index.php?msg1=insert");
+				if($check !== false) {
+					move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
+				} else {
+					echo "File is not an image.";
+				}
+			    header("Location:index.php?page=complaint");
 			}else{
 			    echo "Registration failed try again!";
 			}
@@ -67,18 +79,25 @@
 		// Update customer data into customer table
 		public function updateRecord($postData)
 		{
-		    $foto = $this->con->real_escape_string($_POST['foto']);
-		    $description = $this->con->real_escape_string($_POST['description']);
-		    $id = $this->con->real_escape_string($_POST['id']);
-			if (!empty($id) && !empty($postData)) {
-			$query = "UPDATE complaint SET foto = '$foto', description = '$description' WHERE id = '$id'";
-			$sql = $this->con->query($query);
+			$target_dir = "assets/uploads/";
+			$description = $this->con->real_escape_string($_POST['description']);
+			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			
+			$query="UPDATE complaint(custumers_id,foto,description) VALUES(id,'$target_file','$description')";
+			$check = getimagesize($_FILES["foto"]["tmp_name"]);
+			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {
-			    header("Location:index.php?msg2=update");
+				if($check !== false) {
+					move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
+				} else {
+					echo "File is not an image.";
+				}
+			    header("Location:index.php?page=user-update");
 			}else{
-			    echo "Registration updated failed try again!";
+			    echo "updated failed try again!";
 			}
-		    }
+		    
 			
 		}
 
@@ -89,7 +108,7 @@
 		    $query = "DELETE FROM complaint WHERE id = '$id'";
 		    $sql = $this->con->query($query);
 				if ($sql==true) {
-					header("Location:index.php?msg3=delete");
+					header("Location:index.php?page=complaint");
 				} else{
 					echo "Record does not delete try again";
 				}

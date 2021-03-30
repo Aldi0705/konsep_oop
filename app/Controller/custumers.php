@@ -64,9 +64,9 @@
 			if ($result->num_rows > 0) {
 				$row = $result->fetch_assoc();
 				return $row;
-				}else{
+			} else{
 				echo "Record not found";
-				}
+			}
 		}
 
 		// Update customer data into customer table
@@ -86,7 +86,7 @@
 		    $id = $this->con->real_escape_string($_POST['id']);
 			if (!empty($id) && !empty($postData)) {
 				if ($sql==true) {
-					header("Location:index.php?msg2=update");
+					header("Location:index.php?page=user-update");
 				} else{
 					echo "Registration updated failed try again!";
 				}
@@ -97,13 +97,13 @@
 
 		// Delete customer data from customer table
 		public function deleteRecord($id)
-		{
+		{	
 		    $query = "DELETE FROM customers WHERE id = '$id'";
 		    $sql = $this->con->query($query);
 			if ($sql==true) {
 				header("Location:index.php?page=user");
 			} else{
-				echo "Record does not delete try again";
+				echo "Record does not delete try again <a href='index.php?page=user' class='btn btn0link'>Kembali ke halaman user</a>";
 			}
 		}
 

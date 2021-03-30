@@ -10,11 +10,30 @@ switch($page){
   case 'user-update': // $page == home (jika isi dari $page adalah home)
     include "user/edit.php"; // load file home.php yang ada di folder views
   break;
+  case 'user-delete': // $page == home (jika isi dari $page adalah home)
+    include 'app/Controller/custumers.php';
+    $customerObj = new Customers();
+    if(isset($_POST['deleteId']) && !empty($_POST['deleteId'])) {
+        $deleteId = $_POST['deleteId'];
+        $customerObj->deleteRecord($deleteId);
+    }
+  break;
   case 'complaint': // $page == home (jika isi dari $page adalah home)
     include "complaint/index.php"; // load file home.php yang ada di folder views
   break;
   case 'complaint-create': // $page == home (jika isi dari $page adalah home)
     include "complaint/add.php"; // load file home.php yang ada di folder views
+  break;
+  case 'complaint-update': // $page == home (jika isi dari $page adalah home)
+    include "complaint/edit.php"; // load file home.php yang ada di folder views
+  break;
+  case 'complaint-delete': // $page == home (jika isi dari $page adalah home)
+    include 'app/Controller/complaint.php';
+    $customerObj = new complaint();
+    if(isset($_POST['deleteId']) && !empty($_POST['deleteId'])) {
+        $deleteId = $_POST['deleteId'];
+        $customerObj->deleteRecord($deleteId);
+    }
   break;
   // case 'case_selanjutnya':
   // include "views/case_selanjutnya.php";

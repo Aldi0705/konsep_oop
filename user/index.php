@@ -52,11 +52,37 @@
           <td><?php echo $customer['bod'] ?></td>
           <td><?php echo $customer['address'] ?></td>
           <td>
-            <a href="index.php?page=user-update?editId=<?php echo $customer['id'] ?>" style="color:green">
+            <a href="index.php?page=user-update&editId=<?php echo $customer['id'] ?>" style="color:green">
               <i class="fa fa-pencil" aria-hidden="true"></i></a>
-              <form action="index.php?deleteId=<?php echo $customer['id'] ?>" method="get">
-                <button type="submit" class="btn btn-link" style="color:red" onclick="confirm('Are you sure want to delete this record')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-              </form>
+            <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $customer['id'] ?>" style="color:white">
+            <i class="fa fa-trash text-danger" aria-hidden="true"></i></a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal<?php echo $customer['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Pengguna</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="index.php?page=user-delete" method="POST">
+                      <input type="hidden" value="<?php echo $customer['id'] ?>" name="deleteId">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       <?php } ?>

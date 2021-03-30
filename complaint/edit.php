@@ -1,50 +1,39 @@
 <?php
   
   // Include database file
-  include 'custumers.php';
+  include 'app/Controller/complaint.php';
 
-  $customerObj = new Customers();
+  $complaintObj = new complaint();
 
-  // Edit customer record
+  // Edit complaint record
   if(isset($_GET['editId']) && !empty($_GET['editId'])) {
     $editId = $_GET['editId'];
-    $customer = $customerObj->displyaRecordById($editId);
+    $complaint = $complaintObj->displyaRecordById($editId);
   }
 
-  // Update Record in customer table
+  // Update Record in complaint table
   if(isset($_POST['update'])) {
-    $customerObj->updateRecord($_POST);
+    $complaintObj->updateRecord($_POST);
   }  
     
 ?>
 <div class="card text-center" style="padding:15px;">
-  <h4>PHP: CRUD (Add, Edit, Delete, View) Application using OOP (Object Oriented Programming) and MYSQL</h4>
-</div><br> 
+  <h4 style="text-transform: capitalize;">View <?php echo $_GET['page']; ?></h4>
+</div><br><br> 
 
 <div class="container">
-  <form action="edit.php" method="POST">
+  <form action="index.php?page=complaint-update" method="POST">
+    <img src="<?php echo $complaint['foto'] ?>" width="250" height="150">
     <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" name="name" value="<?php echo $customer['name']; ?>" required="">
+      <label for="name">Masukkan bukti:</label>
+      <input class="form-control" type="file" name="foto" multiple>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Laporan</label>
+      <textarea class="form-control" name="description" require="" rows="3"></textarea>
     </div>
     <div class="form-group">
-      <label for="email">Email address:</label>
-      <input type="email" class="form-control" name="email" value="<?php echo $customer['email']; ?>" required="">
-    </div>
-    <div class="form-group">
-      <label for="password">pass:</label>
-      <input type="text" class="form-control" name="password" value="">
-    </div>
-    <div class="form-group">
-      <label for="rule">Rule:</label>
-        <select name="rule" >
-          <option value="Admin" <?php echo $customer['rule'] === 'Admin'? 'selected' : '' ?>>Admin</option>
-          <option value="Petugas" <?php echo $customer['rule'] === 'Petugas'? 'selected' : '' ?>>Petugas</option>
-          <option value="Masyarakat" <?php echo $customer['rule'] === 'Masyarakat'? 'selected' : '' ?>>Masyarakat</option>
-        </select>
-    </div>
-    <div class="form-group">
-      <input type="hidden" name="id" value="<?php echo $customer['id']; ?>">
+      <input type="hidden" name="id" value="<?php echo $complaint['id']; ?>">
       <input type="submit" name="update" class="btn btn-primary" style="float:right;" value="Update">
     </div>
   </form>

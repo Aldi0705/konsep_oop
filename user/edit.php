@@ -18,14 +18,14 @@
     
 ?>
 <div class="card text-center" style="padding:15px;">
-  <h4>PHP: CRUD (Add, Edit, Delete, View) Application using OOP (Object Oriented Programming) and MYSQL</h4>
-</div><br> 
+  <h4 style="text-transform: capitalize;">View <?php echo $_GET['page']; ?></h4>
+</div><br><br> 
 
 <div class="container">
-  <form action="edit.php" method="POST">
+  <form action="index.php?page=user-update" method="POST">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" class="form-control" name="name" value="<?php echo $customer['name']; ?>" required="">
+      <input type="text" class="form-control" name="name" value="<?php echo $customer['name']; ?>" required="" >
     </div>
     <div class="form-group">
       <label for="email">Email address:</label>

@@ -3,7 +3,7 @@
   // Include database file
   include 'app/Controller/complaint.php';
 
-  $customerObj = new complaint();
+  $complaintObj = new complaint();
 
   // Delete record from table
   
@@ -11,7 +11,7 @@
     echo $_GET['deleteId'];
   exit;
       $deleteId = $_GET['deleteId'];
-      $customerObj->deleteRecord($deleteId);
+      $complaintObj->deleteRecord($deleteId);
   }
      
 ?>
@@ -35,20 +35,47 @@
     </thead>
     <tbody>
         <?php 
-          $customers = $customerObj->displayData();
-          if (!is_null($customers)) {
-            foreach ($customers as $customer){
+          $complaint = $complaintObj->displayData();
+          if (!is_null($complaint)) {
+            foreach ($complaint as $complaint){
         ?>
         <tr>
-          <td><?php echo $customer['customer_name'] ?></td>
-          <td><img src="gambar/<?php echo $customer['foto'] ?>" width="35" height="40"></td>
-          <td><?php echo $customer['description'] ?></td>
+          <td><?php echo $complaint['customer_name'] ?></td>
+          <td><img src="<?php echo $complaint['foto'] ?>" width="35" height="40"></td>
+          <td><?php echo $complaint['description'] ?></td>
           <td>
-            <a href="index.php?page=user-update?editId=<?php echo $customer['id'] ?>" style="color:green">
-              <i class="fa fa-pencil" aria-hidden="true"></i></a>
-              <form action="index.php?deleteId=<?php echo $customer['id'] ?>" method="get">
-                <button type="submit" class="btn btn-link" style="color:red" onclick="confirm('Are you sure want to delete this record')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-              </form>
+            <a href="index.php?page=complaint-update&editId=<?php echo $complaint['id'] ?>" style="color:green">
+            <i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $complaint['id'] ?>" style="color:white">
+              <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+            </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal<?php echo $complaint['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Complaint</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="index.php?page=complaint-delete" method="POST">
+                      <input type="hidden" value="<?php echo $complaint['id'] ?>" name="deleteId">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       <?php } ?>
