@@ -23,7 +23,7 @@
       <input type="text" class="form-control" name="name" placeholder="Enter name" required="">
     </div>
     <div class="form-group">
-      <label for="nik">Name:</label>
+      <label for="nik">Nik:</label>
       <input type="number" class="form-control" name="nik" placeholder="Enter nik" required="">
     </div>
     <div class="form-group">
