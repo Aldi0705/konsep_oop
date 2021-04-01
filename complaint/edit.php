@@ -11,6 +11,10 @@
     $complaint = $complaintObj->displyaRecordById($editId);
   }
 
+  if(isset($_GET['get'])) {
+    $complaintObj->displayData($_GET);
+  }  
+
   // Update Record in complaint table
   if(isset($_POST['update'])) {
     $complaintObj->updateRecord($_POST);
@@ -22,11 +26,13 @@
 </div><br><br> 
 
 <div class="container">
-  <form action="index.php?page=complaint-update" method="POST">
+  <form action="index.php?page=complaint-update" method="POST" enctype="multipart/form-data">
     <img src="<?php echo $complaint['foto'] ?>" width="250" height="150">
     <div class="form-group">
-      <label for="name">Masukkan bukti:</label>
-      <input class="form-control" type="file" name="foto" multiple>
+      <label for="foto">Masukkan bukti:</label>
+      <input class="form-control" type="file" name="foto" multiple >
+      <input type="hidden" name="custumer_id" value="<?php echo $row['id']?>" >
+      <input type="hidden" name="id" value="<?php echo $_GET['editId']?>" >
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Laporan</label>

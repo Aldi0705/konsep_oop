@@ -20,8 +20,8 @@
        
        $sql = "SELECT id FROM customers WHERE email = '$myusername' and password = '$mypassword'";
        $result = mysqli_query($koneksi,$sql);
-       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-       $active = $row['active'];
+      //  $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      //  $active = $row['active'];
        
        $count = mysqli_num_rows($result);
        // If result matched $myusername and $mypassword, table row must be 1 row
@@ -31,6 +31,7 @@
           
           header("location: index.php");
        }else {
+          echo "Your Login Name or Password is invalid";
           $error = "Your Login Name or Password is invalid";
        }
     }

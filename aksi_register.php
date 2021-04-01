@@ -1,6 +1,8 @@
 <?php 
     // koneksi database
     // include 'koneksi.php';
+
+  // Include database file
     $localhost = 'localhost';
     $username = 'root';
     $password = '';
@@ -21,7 +23,7 @@
     $role = 'masyarakat';
     $bod = $_POST['bod'];
     $address = $_POST['address'];
-    $query = "INSERT INTO customers (name,nik,email,password,telp,role,address,bod) values('$name','$nik','$email','$password','$telp','$role','$bod','$address')";
+    $query = "INSERT INTO customers (name,nik,email,password,telp,rule,bod,address) values('$name','$nik','$email','$password','$telp','$role','$bod','$address')";
     
     // menginput data ke database
     $send = mysqli_query($koneksi,$query) or die(mysqli_error($koneksi).$query);

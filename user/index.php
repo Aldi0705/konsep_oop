@@ -52,6 +52,9 @@
           <td><?php echo $customer['bod'] ?></td>
           <td><?php echo $customer['address'] ?></td>
           <td>
+            <a href="index.php?page=user-detail">
+              <i class="fa fa-info" aria-hidden="true" style="padding-left:1px;"></i>
+            </a>
             <a href="index.php?page=user-update&editId=<?php echo $customer['id'] ?>" style="color:green">
               <i class="fa fa-pencil" aria-hidden="true"></i></a>
             <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $customer['id'] ?>" style="color:white">

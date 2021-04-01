@@ -26,13 +26,13 @@
 		// Insert customer data into customer table
 		public function insertData($post)
 		{
-			$cus = $this->con->real_escape_string($_POST['customer_nik']);
+			$cus = $this->con->real_escape_string($_POST['customer_name']);
 			$target_dir = "assets/uploads/";
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			
-			$query="INSERT INTO complaint(custumers_id,foto,description) VALUES(3,'$target_file','$description')";
+			$query="INSERT INTO complaint(custumers_name,foto,description) VALUES('customer_name','$target_file','$description')";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {
@@ -83,8 +83,10 @@
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			$custumer_id = $_POST['custumer_id'];
+			$id = $_POST['id'];
 			
-			$query="UPDATE complaint(custumers_id,foto,description) VALUES(id,'$target_file','$description')";
+			$query="UPDATE complaint SET foto = '$target_file', custumers_id = '$custumer_id' WHERE id = '$id'";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {
@@ -93,7 +95,7 @@
 				} else {
 					echo "File is not an image.";
 				}
-			    header("Location:index.php?page=user-update");
+			    header("Location:index.php?page=complaint");
 			}else{
 			    echo "updated failed try again!";
 			}

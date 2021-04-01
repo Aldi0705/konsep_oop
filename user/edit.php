@@ -22,7 +22,7 @@
 </div><br><br> 
 
 <div class="container">
-  <form action="index.php?page=user-update" method="POST">
+  <form action="/index.php?page=user-update&editId=<?php echo $customer['id']; ?>" method="POST">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" class="form-control" name="name" value="<?php echo $customer['name']; ?>" required="" >

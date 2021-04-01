@@ -3,22 +3,21 @@
   // Include database file
   include 'app/Controller/complaint.php';
 
-  $customerObj = new complaint();
+  $complaintObj = new complaint();
 
-  // Insert Record in customer table
+  // Insert Record in complaint table
   if(isset($_POST['submit'])) {
-    $customerObj->insertData($_POST);
+    $complaintObj->insertData($_POST);
+    $complaint = $complaintObj->displayData($_GET);
   }
+  
 ?>
 <div class="card text-center" style="padding:15px;">
   <h4>CRUD Complaint</h4>
 </div><br> 
 <div class="container">
   <form action="index.php?page=complaint-create" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-      <label for="customer_nik">Nik:</label>
-      <input type="text" class="form-control" name="customer_nik" placeholder="Enter nik" required="">
-    </div>
+    <input type="hidden" name="custumer_id" value="<?php echo $row['id']?>" >
     <div class="mb-3">
       <label for="formFileMultiple" class="form-label">Masukkan Bukti</label>
       <input class="form-control" type="file" name="foto" multiple>

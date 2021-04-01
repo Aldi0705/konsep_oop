@@ -73,12 +73,15 @@
 		public function updateRecord($postData)
 		{
 		    $name = $this->con->real_escape_string($_POST['name']);
+			$rule = $this->con->real_escape_string($_POST['rule']);
 		    $email = $this->con->real_escape_string($_POST['email']);
+			$id = $_POST['id'];
 			if (isset($_POST['password']) && $_POST['password'] !== '') {
 				$password = $this->con->real_escape_string(md5($_POST['password']));
 				$query = "UPDATE customers SET name = '$name', email = '$email', password = '$password', rule = '$rule' WHERE id = '$id'";
 				$sql = $this->con->query($query);
 			} else {
+				
 				$query = "UPDATE customers SET name = '$name', email = '$email', rule = '$rule' WHERE id = '$id'";
 				$sql = $this->con->query($query);
 			}
@@ -86,7 +89,7 @@
 		    $id = $this->con->real_escape_string($_POST['id']);
 			if (!empty($id) && !empty($postData)) {
 				if ($sql==true) {
-					header("Location:index.php?page=user-update");
+					header("Location:index.php?page=user");
 				} else{
 					echo "Registration updated failed try again!";
 				}
