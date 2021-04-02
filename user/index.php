@@ -21,7 +21,7 @@
 </div><br><br> 
 
 <div class="container">
-  <h2>View User
+  <h2>View <?php echo $_GET['page']; ?>
     <a href="index.php?page=user-create" class="btn btn-primary" style="float:right;">Add New Record</a>
   </h2>
   <table class="table table-hover">
@@ -52,7 +52,7 @@
           <td><?php echo $customer['bod'] ?></td>
           <td><?php echo $customer['address'] ?></td>
           <td>
-            <a href="index.php?page=user-detail">
+            <a href="index.php?page=user-detail&&detailId=<?php echo $customer['id'] ?>">
               <i class="fa fa-info" aria-hidden="true" style="padding-left:1px;"></i>
             </a>
             <a href="index.php?page=user-update&editId=<?php echo $customer['id'] ?>" style="color:green">

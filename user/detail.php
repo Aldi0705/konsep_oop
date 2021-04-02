@@ -7,12 +7,11 @@
 
   // Delete record from table
   
-  if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
-    echo $_GET['deleteId'];
-  exit;
-      $deleteId = $_GET['deleteId'];
-      $customerObj->deleteRecord($deleteId);
+  if(isset($_GET['detailId']) && !empty($_GET['detailId'])) {
+    $detailId = $_GET['detailId'];
+    $customer = $customerObj->displyaRecordById($detailId);
   }
+
      
 ?>
 
@@ -21,6 +20,8 @@
 </div><br><br> 
 
 <div class="container">
+  <h2>View <?php echo $_GET['page']; ?>
+  </h2>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -35,9 +36,7 @@
     </thead>
     <tbody>
         <?php 
-          $customers = $customerObj->displayData();
-          if (!is_null($customers)) {
-            foreach ($customers as $customer){
+          if (!is_null($customer)) {
         ?>
         <tr>
           <td><?php echo $customer['name'] ?></td>
@@ -47,7 +46,7 @@
           <td><?php echo $customer['rule'] ?></td>
           <td><?php echo $customer['bod'] ?></td>
           <td><?php echo $customer['address'] ?></td>
-      <?php } ?>
+        </tr>
       <?php } else { ?>
         <tr>
           <td colspan="8">Tidak ada untuk saat ini.</td>

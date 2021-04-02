@@ -64,6 +64,7 @@
 			if ($result->num_rows > 0) {
 				$row = $result->fetch_assoc();
 				return $row;
+
 			} else{
 				echo "Record not found";
 			}
@@ -107,6 +108,18 @@
 				header("Location:index.php?page=user");
 			} else{
 				echo "Record does not delete try again <a href='index.php?page=user' class='btn btn0link'>Kembali ke halaman user</a>";
+			}
+		}
+
+		public function getDetailId($id)
+		{
+			$query = "SELECT * FROM customers WHERE id = '$id'";
+		    $result = $this->con->query($query);
+			if ($result->num_rows > 0) {
+				$row = $result->fetch_assoc();
+				return $row;
+			} else{
+				echo "Record not found";
 			}
 		}
 

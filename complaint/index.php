@@ -44,9 +44,11 @@
           <td><img src="<?php echo $complaint['foto'] ?>" width="35" height="40" style="border-radius:50%;" data-toggle="modal"></td>
           <td><?php echo $complaint['description'] ?></td>
           <td>
-            <a href="index.php?page=complaint-detail">
+            <?php if($row['rule'] === 'Admin' || $row['rule'] === 'Petugas'){?>
+            <a href="index.php?page=complaint-detail&&detailId=<?php echo $complaint['id'] ?>">
               <i class="fa fa-info" aria-hidden="true" style="padding-left:1px;"></i>
             </a>
+            <?php } ?>
             <a href="index.php?page=complaint-update&editId=<?php echo $complaint['id'] ?>" style="color:green">
             <i class="fa fa-pencil" aria-hidden="true"></i></a>
             <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $complaint['id'] ?>" style="color:white">
