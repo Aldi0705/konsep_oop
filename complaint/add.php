@@ -17,14 +17,10 @@
 </div><br> 
 <div class="container">
   <form action="index.php?page=complaint-create" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="custumer_id" value="<?php echo $row['id']?>" >
+    <input type="hidden" name="customer_name" value="<?php echo $row['name']?>" >
     <div class="mb-3">
       <label for="formFileMultiple" class="form-label">Masukkan Bukti</label>
       <input class="form-control" type="file" name="foto" multiple>
-    </div>
-    <div class="form-group">
-      <label for="tanggal">Tanggal</label>
-      <input type="date" class="form-control" name="tanggal" required="">
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Laporan</label>

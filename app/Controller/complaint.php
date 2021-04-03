@@ -26,13 +26,13 @@
 		// Insert customer data into customer table
 		public function insertData($post)
 		{
-			$cus = $this->con->real_escape_string($_POST['customer_name']);
+			$customer_id = $this->con->real_escape_string($_POST['customer_name']);
 			$target_dir = "assets/uploads/";
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			
-			$query="INSERT INTO complaint(custumers_name,foto,description) VALUES('customer_name','$target_file','$description')";
+			$query="INSERT INTO complaint(customer_name,foto,description) VALUES('$customer_id','$target_file','$description')";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {

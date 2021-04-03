@@ -5,9 +5,13 @@
 
   $complaintObj = new complaint();
 
-  if(isset($_GET['detailId']) && !empty($_GET['detailId'])) {
-    $detailId = $_GET['detailId'];
-    $complaint = $complaintObj->displyaRecordById($detailId);
+  // Delete record from table
+  
+  if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
+    echo $_GET['deleteId'];
+  exit;
+      $deleteId = $_GET['deleteId'];
+      $complaintObj->deleteRecord($deleteId);
   }
      
 ?>
@@ -17,7 +21,7 @@
 </div><br><br> 
 
 <div class="container">
-  <h2>View User
+  <h2>View <?php echo $_GET['page']; ?>
   </h2>
   <table class="table table-hover">
     <thead>
@@ -29,14 +33,16 @@
     </thead>
     <tbody>
         <?php 
-          if (!is_null($complaint)){
-            
+          $complaint = $complaintObj->displayData();
+          if (!is_null($complaint)) {
+            foreach ($complaint as $complaint){
         ?>
         <tr>
           <td><?php echo $complaint['customer_name'] ?></td>
-          <td><img src="<?php echo $complaint['foto'] ?>" width="35" height="40" ></td>
+          <td><img src="<?php echo $complaint['foto'] ?>" width="35" height="40"></td>
           <td><?php echo $complaint['description'] ?></td>
         </tr>
+      <?php } ?>
       <?php } else { ?>
         <tr>
           <td colspan="8">Tidak ada untuk saat ini.</td>
