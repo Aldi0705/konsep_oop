@@ -33,6 +33,9 @@ switch($page){
   case 'complaint-detail': // $page == home (jika isi dari $page adalah home)
     include "complaint/detail.php"; // load file home.php yang ada di folder views
   break;
+  case 'complaint-respon': // $page == home (jika isi dari $page adalah home)
+    include "complaint/respons.php"; // load file home.php yang ada di folder views
+  break;
   case 'complaint-delete': // $page == home (jika isi dari $page adalah home)
     include 'app/Controller/complaint.php';
     $customerObj = new complaint();
@@ -40,6 +43,9 @@ switch($page){
         $deleteId = $_POST['deleteId'];
         $customerObj->deleteRecord($deleteId);
     }
+  break;
+  case 'Respons': // $page == home (jika isi dari $page adalah home)
+    include "Respons/index.php"; // load file home.php yang ada di folder views
   break;
   // case 'case_selanjutnya':
   // include "views/case_selanjutnya.php";

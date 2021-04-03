@@ -29,6 +29,11 @@
       <li class="nav-item">
         <a class="nav-link" href="index.php?page=complaint">Complaint</a>
       </li>
+      <?php if($row['rule'] === 'Admin' || $row['rule'] === 'Petugas') { ?>
+      <li class="nav-item">
+        <a class="nav-link" href="index.php?page=Respons">Tanggapan</a>
+      </li>
+      <?php }?>
     </ul>
   </div>
   <ul class="navbar-nav">

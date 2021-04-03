@@ -22,6 +22,7 @@
 
 <div class="container">
   <h2>View <?php echo $_GET['page']; ?>
+    <a href="index.php?page=complaint-respon" class="btn btn-primary" style="float:right;">Tanggapi</a>
   </h2>
   <table class="table table-hover">
     <thead>
