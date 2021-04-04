@@ -34,8 +34,10 @@
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			
 			$query="INSERT INTO respons(custumers_id, complaint_id,description) VALUES('$customer_id','$complaint_id','$description')";
+			$queryComplaint = "UPDATE complaint SET status = 'Sedang Diproses' where id = $complaint_id";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
+			$this->con->query($queryComplaint) or die(mysqli_error($this->con).$queryComplaint);
 			if ($sql==true) {
 				if($check !== false) {
 					move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
@@ -49,9 +51,12 @@
 		}
 
 		// Fetch customer records for show listing
-		public function displayData()
+		public function displayData($customer_id = null)
 		{
-		    $query = "SELECT c.name as customer_name, c.id as customer_id, cs.foto as complaint_foto, cs.description as complaint_description, rs.* FROM respons rs Join complaint cs on rs.complaint_id = cs.id Join customers c on rs.custumers_id = c.id";
+			$query = "SELECT c.name as customer_name, c.id as customer_id, cs.foto as complaint_foto, cs.description as complaint_description, rs.* FROM respons rs Join complaint cs on rs.complaint_id = cs.id Join customers c on rs.custumers_id = c.id";
+		    if (!is_null($customer_id)) {
+				$query = $query . " where rs.complaint_id = " . $customer_id;
+			}
 		    $result = $this->con->query($query);
 			if ($result->num_rows > 0) {
 				$data = array();

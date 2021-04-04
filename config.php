@@ -41,6 +41,14 @@ switch($page){
         $customerObj->deleteRecord($deleteId);
     }
   break;
+  case 'complaint-finish': // $page == home (jika isi dari $page adalah home)
+    include 'app/Controller/complaint.php';
+    $customerObj = new complaint();
+    if(isset($_GET['complaint_id']) && !empty($_GET['complaint_id'])) {
+        $complaintId = $_GET['complaint_id'];
+        $customerObj->updateStatus($complaintId);
+    }
+  break;
   case 'complaint-response': // $page == home (jika isi dari $page adalah home)
     include 'app/Controller/respon.php';
     $responObj = new respon();

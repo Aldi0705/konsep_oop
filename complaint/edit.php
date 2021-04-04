@@ -36,7 +36,11 @@
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Laporan</label>
-      <textarea class="form-control" name="description" require="" rows="3"></textarea>
+      <textarea class="form-control" name="description" require="" rows="3"><?php echo $complaint['description'] ?></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="formFileMultiple" class="form-label">Masukkan Bukti</label>
+      <input class="form-control" type="date" name="date" value="<?php echo $complaint['date'] ?>">
     </div>
     <div class="form-group">
       <input type="hidden" name="id" value="<?php echo $complaint['id']; ?>">

@@ -26,6 +26,10 @@
       <label for="exampleFormControlTextarea1" class="form-label">Laporan</label>
       <textarea class="form-control" name="description" require="" rows="3"></textarea>
     </div>
+    <div class="mb-3">
+      <label for="formFileMultiple" class="form-label">Masukkan Bukti</label>
+      <input class="form-control" type="date" name="date">
+    </div>
     <input type="submit" name="submit" class="btn btn-primary" style="float:right;" value="Submit">
   </form>
 </div>

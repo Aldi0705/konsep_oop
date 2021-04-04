@@ -31,8 +31,10 @@
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			$status = 'Baru';
+			$date = $this->con->real_escape_string($_POST['date']);
 			
-			$query="INSERT INTO complaint(custumers_id,foto,description) VALUES('$customer_id','$target_file','$description')";
+			$query="INSERT INTO complaint(custumers_id,foto,description, status, date) VALUES('$customer_id','$target_file','$description', '$status', '$date')";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {
@@ -108,6 +110,18 @@
 		public function deleteRecord($id)
 		{
 		    $query = "DELETE FROM complaint WHERE id = '$id'";
+		    $sql = $this->con->query($query);
+				if ($sql==true) {
+					header("Location:index.php?page=complaint");
+				} else{
+					echo "Record does not delete try again <a href='index.php?page=complaint' class='btn btn0link'>Kembali ke halaman complaint</a>";
+				}
+		}
+
+		// Delete customer data from customer table
+		public function updateStatus($id)
+		{
+		    $query = "UPDATE complaint set status = 'Selesai' WHERE id = '$id'";
 		    $sql = $this->con->query($query);
 				if ($sql==true) {
 					header("Location:index.php?page=complaint");
