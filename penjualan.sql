@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Apr 2021 pada 07.29
+-- Waktu pembuatan: 04 Apr 2021 pada 14.36
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.2
 
@@ -35,6 +35,15 @@ CREATE TABLE `complaint` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `complaint`
+--
+
+INSERT INTO `complaint` (`id`, `custumers_id`, `foto`, `description`) VALUES
+(7, 6, 'assets/uploads/2.png', 'aaa'),
+(9, 6, 'assets/uploads/fa251c8aa5be7f9c7ba96a8372794d22.jpg', 'tt'),
+(10, 6, 'assets/uploads/17.png', 'ut');
+
 -- --------------------------------------------------------
 
 --
@@ -58,11 +67,29 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `nik`, `email`, `password`, `telp`, `rule`, `bod`, `address`) VALUES
-(4, 'adel', '324535345345345', 'test@gmail.com', '25d55ad283aa400af464c76d713c07ad', '34234234234234', 'Masyarakat', '0000-00-00', '2021-04-22'),
-(5, 'rozi', '123423423423423', 'rozi@gmail.com', '25d55ad283aa400af464c76d713c07ad', '34535345345435', 'masyarakat', '2021-04-24', 'asdasdasdad'),
-(6, 'aldi', '234234234', 'aldi@gmail.com', '1bbd886460827015e5d605ed44252251', '34534534534', 'Admin', '2021-04-24', 'sdfsdfdsf'),
-(7, 'adin', '324234234234', 'adin@gmail.com', '25d55ad283aa400af464c76d713c07ad', '324234234', 'masyarakat', '2021-04-20', 'sdfdfs'),
-(8, 'ajeng', '776866756546', 'ajeng@gmail.com', '25d55ad283aa400af464c76d713c07ad', '8576567', 'Admin', '2021-04-30', 'aaaaa');
+(6, 'aldi', '234234234', 'aldi@gmail.com', '1bbd886460827015e5d605ed44252251', '34534534534', 'Admin', '2021-04-24', 'sdfsdfdsf');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `respons`
+--
+
+CREATE TABLE `respons` (
+  `id` int(11) NOT NULL,
+  `custumers_id` int(11) NOT NULL,
+  `complaint_id` int(11) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `respons`
+--
+
+INSERT INTO `respons` (`id`, `custumers_id`, `complaint_id`, `description`) VALUES
+(1, 6, 7, 'ppppp'),
+(2, 6, 9, 'test'),
+(3, 6, 10, 'hh');
 
 --
 -- Indexes for dumped tables
@@ -86,6 +113,14 @@ ALTER TABLE `customers`
   ADD UNIQUE KEY `telp` (`telp`);
 
 --
+-- Indeks untuk tabel `respons`
+--
+ALTER TABLE `respons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `respons_complaint_id` (`complaint_id`),
+  ADD KEY `respons_customers_id` (`custumers_id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -93,13 +128,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT untuk tabel `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `respons`
+--
+ALTER TABLE `respons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -110,6 +151,13 @@ ALTER TABLE `customers`
 --
 ALTER TABLE `complaint`
   ADD CONSTRAINT `complaint_custumers_id` FOREIGN KEY (`custumers_id`) REFERENCES `customers` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `respons`
+--
+ALTER TABLE `respons`
+  ADD CONSTRAINT `respons_complaint_id` FOREIGN KEY (`complaint_id`) REFERENCES `complaint` (`id`),
+  ADD CONSTRAINT `respons_customers_id` FOREIGN KEY (`custumers_id`) REFERENCES `customers` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

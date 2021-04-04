@@ -33,9 +33,6 @@ switch($page){
   case 'complaint-detail': // $page == home (jika isi dari $page adalah home)
     include "complaint/detail.php"; // load file home.php yang ada di folder views
   break;
-  case 'complaint-respon': // $page == home (jika isi dari $page adalah home)
-    include "complaint/respons.php"; // load file home.php yang ada di folder views
-  break;
   case 'complaint-delete': // $page == home (jika isi dari $page adalah home)
     include 'app/Controller/complaint.php';
     $customerObj = new complaint();
@@ -44,8 +41,18 @@ switch($page){
         $customerObj->deleteRecord($deleteId);
     }
   break;
+  case 'complaint-response': // $page == home (jika isi dari $page adalah home)
+    include 'app/Controller/respon.php';
+    $responObj = new respon();
+    if(isset($_POST['description']) && !empty($_POST['description'])) {
+        $responObj->insertData($_POST);
+    }
+  break;
   case 'Respons': // $page == home (jika isi dari $page adalah home)
     include "Respons/index.php"; // load file home.php yang ada di folder views
+  break;
+  case 'respon': // $page == home (jika isi dari $page adalah home)
+    include "Respons/respons.php"; // load file home.php yang ada di folder views
   break;
   // case 'case_selanjutnya':
   // include "views/case_selanjutnya.php";

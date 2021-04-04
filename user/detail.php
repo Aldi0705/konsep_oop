@@ -20,31 +20,37 @@
 </div><br><br> 
 
 <div class="container">
-  <h2>View <?php echo $_GET['page']; ?>
-  </h2>
   <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Nik</th>
-        <th>Email</th>
-        <th>No.Telp</th>
-        <th>Rule</th>
-        <th>Tanggal Lahir</th>
-        <th>Alamat</th>
-      </tr>
-    </thead>
     <tbody>
         <?php 
           if (!is_null($customer)) {
         ?>
         <tr>
+          <th>Name</th>
           <td><?php echo $customer['name'] ?></td>
+        </tr>
+        <tr>
+          <th>Nik</th>
           <td><?php echo $customer['nik'] ?></td>
+        </tr>
+        <tr>  
+          <th>Email</th>
           <td><?php echo $customer['email'] ?></td>
+        </tr>
+        <tr> 
+         <th>No.Telp</th>
           <td><?php echo $customer['telp'] ?></td>
+        </tr>
+        <tr>
+          <th>Rule</th>
           <td><?php echo $customer['rule'] ?></td>
+        </tr>
+        <tr>
+          <th>Tanggal Lahir</th>
           <td><?php echo $customer['bod'] ?></td>
+        </tr>
+        <tr>
+          <th>Alamat</th>
           <td><?php echo $customer['address'] ?></td>
         </tr>
       <?php } else { ?>

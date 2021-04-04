@@ -8,6 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+  <style>
+    body {
+      background: #eaeaea;
+    }
+  </style>
 </head>
 <body>
 
@@ -29,11 +34,6 @@
       <li class="nav-item">
         <a class="nav-link" href="index.php?page=complaint">Complaint</a>
       </li>
-      <?php if($row['rule'] === 'Admin' || $row['rule'] === 'Petugas') { ?>
-      <li class="nav-item">
-        <a class="nav-link" href="index.php?page=Respons">Tanggapan</a>
-      </li>
-      <?php }?>
     </ul>
   </div>
   <ul class="navbar-nav">

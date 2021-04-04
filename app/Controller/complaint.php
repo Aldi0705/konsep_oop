@@ -26,13 +26,13 @@
 		// Insert customer data into customer table
 		public function insertData($post)
 		{
-			$customer_id = $this->con->real_escape_string($_POST['customer_name']);
+			$customer_id = $this->con->real_escape_string($_POST['custumers_id']);
 			$target_dir = "assets/uploads/";
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			
-			$query="INSERT INTO complaint(customer_name,foto,description) VALUES('$customer_id','$target_file','$description')";
+			$query="INSERT INTO complaint(custumers_id,foto,description) VALUES('$customer_id','$target_file','$description')";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {
@@ -66,14 +66,14 @@
 		// Fetch single data for edit from customer table
 		public function displyaRecordById($id)
 		{
-		    $query = "SELECT * FROM complaint WHERE id = '$id'";
+		    $query = "SELECT cs.id as customer_id, cs.name as customer_name, cs.nik as customer_nik, cp.* FROM complaint cp Join customers cs on cp.custumers_id = cs.id where cp.id = ".$id;
 		    $result = $this->con->query($query);
 			if ($result->num_rows > 0) {
 				$row = $result->fetch_assoc();
 				return $row;
-				}else{
+			} else {
 				echo "Record not found";
-				}
+			}
 		}
 
 		// Update customer data into customer table
@@ -112,7 +112,7 @@
 				if ($sql==true) {
 					header("Location:index.php?page=complaint");
 				} else{
-					echo "Record does not delete try again";
+					echo "Record does not delete try again <a href='index.php?page=complaint' class='btn btn0link'>Kembali ke halaman complaint</a>";
 				}
 		}
 
