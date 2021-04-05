@@ -76,14 +76,15 @@
 		    $name = $this->con->real_escape_string($_POST['name']);
 			$rule = $this->con->real_escape_string($_POST['rule']);
 		    $email = $this->con->real_escape_string($_POST['email']);
+		    $nik = $this->con->real_escape_string($_POST['nik']);
 			$id = $_POST['id'];
 			if (isset($_POST['password']) && $_POST['password'] !== '') {
 				$password = $this->con->real_escape_string(md5($_POST['password']));
-				$query = "UPDATE user SET name = '$name', email = '$email', password = '$password', rule = '$rule' WHERE id = '$id'";
+				$query = "UPDATE user SET name = '$name', email = '$email', password = '$password', rule = '$rule', nik = '$nik' WHERE id = '$id'";
 				$sql = $this->con->query($query);
 			} else {
 				
-				$query = "UPDATE user SET name = '$name', email = '$email', rule = '$rule' WHERE id = '$id'";
+				$query = "UPDATE user SET name = '$name', email = '$email', rule = '$rule', nik = '$nik' WHERE id = '$id'";
 				$sql = $this->con->query($query);
 			}
 			$rule = $this->con->real_escape_string($_POST['rule']);

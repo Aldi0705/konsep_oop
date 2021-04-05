@@ -28,6 +28,12 @@
           <a href="index.php?page=complaint-create" class="btn btn-primary" style="float:right;">Tambah Pengaduan</a>
         </div>
       <?php } ?>
+      <?php if ($row['rule'] === 'Admin') { ?>
+      <div class="col-md-12 text-right">
+      <a href="index.php?page=report" class="btn btn-danger">
+        <i class="fa fa-file-pdf" aria-hidden="true"></i> Generate Laporan</a>
+      </div>
+      <?php } ?>
     </div>
     <table class="table table-hover">
       <thead>

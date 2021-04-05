@@ -113,7 +113,7 @@
 		// Delete customer data from customer table
 		public function deleteRecord($id)
 		{
-		    $query = "DELETE FROM complaint WHERE id = '$id'";
+		    $query = "DELETE FROM respon WHERE id = '$id'";
 		    $sql = $this->con->query($query);
 				if ($sql==true) {
 					header("Location:index.php?page=complaint");

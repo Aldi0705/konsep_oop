@@ -28,6 +28,10 @@
       <input type="text" class="form-control" name="name" value="<?php echo $customer['name']; ?>" required="" >
     </div>
     <div class="form-group">
+      <label for="nik">nik:</label>
+      <input type="number" class="form-control" name="nik" value="<?php echo $customer['nik']; ?>" required="" >
+    </div>
+    <div class="form-group">
       <label for="email">Email address:</label>
       <input type="email" class="form-control" name="email" value="<?php echo $customer['email']; ?>" required="">
     </div>

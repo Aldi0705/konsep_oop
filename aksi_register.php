@@ -20,7 +20,7 @@
     $email = $_POST['email'];
     $password = md5($_POST['password']);
     $telp = $_POST['telp'];
-    $role = 'masyarakat';
+    $role = 'Masyarakat';
     $bod = $_POST['bod'];
     $address = $_POST['address'];
     $query = "INSERT INTO user (name,nik,email,password,telp,rule,bod,address) values('$name','$nik','$email','$password','$telp','$role','$bod','$address')";

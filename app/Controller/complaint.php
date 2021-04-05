@@ -88,7 +88,7 @@
 			$user_id = $_POST['user_id'];
 			$id = $_POST['id'];
 			
-			$query="UPDATE complaint SET foto = '$target_file', user_id = '$user_id' WHERE id = '$id'";
+			$query="UPDATE complaint SET foto = '$target_file', user_id = '$user_id', description = '$description'  WHERE id = '$id'";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {

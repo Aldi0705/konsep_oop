@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>CRUD USER</title>
+  <title>Pengaduan</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -11,6 +11,9 @@
   <style>
     body {
       background: #eaeaea;
+    }
+    a:hover{
+      color: red;
     }
   </style>
 </head>

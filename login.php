@@ -33,7 +33,9 @@
 	          </form>
 	          <div class="w-100 text-center mt-4 text">
 	          	<p class="mb-0">Belum mempunyai akun?</p>
-		          <a href="register.php">Register</a>
+		        <a href="register.php">Register</a>
+	          </div>
+			  <div class="w-100 text-center mt-4 text">
 	          </div>
 	        </div>
 				</div>
