@@ -6,7 +6,7 @@
     $localhost = 'localhost';
     $username = 'root';
     $password = '';
-    $database = 'penjualan';
+    $database = 'pengaduan_masyarakat';
     $koneksi = mysqli_connect($localhost,$username,$password,$database);
 
     // Check connection
@@ -23,7 +23,7 @@
     $role = 'masyarakat';
     $bod = $_POST['bod'];
     $address = $_POST['address'];
-    $query = "INSERT INTO customers (name,nik,email,password,telp,rule,bod,address) values('$name','$nik','$email','$password','$telp','$role','$bod','$address')";
+    $query = "INSERT INTO user (name,nik,email,password,telp,rule,bod,address) values('$name','$nik','$email','$password','$telp','$role','$bod','$address')";
     
     // menginput data ke database
     $send = mysqli_query($koneksi,$query) or die(mysqli_error($koneksi).$query);

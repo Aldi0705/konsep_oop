@@ -5,7 +5,7 @@
 		private $servername = "localhost";
 		private $username   = "root";
 		private $password   = "";
-		private $database   = "penjualan";
+		private $database   = "pengaduan_masyarakat";
 		public  $con;
 
 
@@ -26,7 +26,7 @@
 		// Insert customer data into customer table
 		public function insertData($post)
 		{
-			$customer_id = $this->con->real_escape_string($_POST['custumers_id']);
+			$user_id = $this->con->real_escape_string($_POST['user_id']);
 			$target_dir = "assets/uploads/";
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
@@ -34,7 +34,7 @@
 			$status = 'Baru';
 			$date = $this->con->real_escape_string($_POST['date']);
 			
-			$query="INSERT INTO complaint(custumers_id,foto,description, status, date) VALUES('$customer_id','$target_file','$description', '$status', '$date')";
+			$query="INSERT INTO complaint (user_id,foto,description, status, date) VALUES('$user_id','$target_file','$description', '$status', '$date')";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {
@@ -52,7 +52,7 @@
 		// Fetch customer records for show listing
 		public function displayData()
 		{
-		    $query = "SELECT cs.id as customer_id, cs.name as customer_name, cs.nik as customer_nik, cp.* FROM complaint cp Join customers cs on  cp.custumers_id = cs.id";
+		    $query = "SELECT cs.id as user_id, cs.name as user_name, cs.nik as user_nik, cp.* FROM complaint cp Join user cs on  cp.user_id = cs.id";
 		    $result = $this->con->query($query);
 			if ($result->num_rows > 0) {
 				$data = array();
@@ -68,7 +68,7 @@
 		// Fetch single data for edit from customer table
 		public function displyaRecordById($id)
 		{
-		    $query = "SELECT cs.id as customer_id, cs.name as customer_name, cs.nik as customer_nik, cp.* FROM complaint cp Join customers cs on cp.custumers_id = cs.id where cp.id = ".$id;
+		    $query = "SELECT cs.id as user_id, cs.name as user_name, cs.nik as user_nik, cp.* FROM complaint cp Join user cs on cp.user_id = cs.id where cp.id = ".$id;
 		    $result = $this->con->query($query);
 			if ($result->num_rows > 0) {
 				$row = $result->fetch_assoc();
@@ -85,10 +85,10 @@
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-			$custumer_id = $_POST['custumer_id'];
+			$user_id = $_POST['user_id'];
 			$id = $_POST['id'];
 			
-			$query="UPDATE complaint SET foto = '$target_file', custumers_id = '$custumer_id' WHERE id = '$id'";
+			$query="UPDATE complaint SET foto = '$target_file', user_id = '$user_id' WHERE id = '$id'";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {

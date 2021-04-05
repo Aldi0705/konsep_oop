@@ -23,9 +23,11 @@
 <div class="container">
   <div class="card p-3">
     <div class="row mb-3">
-      <div class="col-md-12 text-right">
-        <a href="index.php?page=complaint-create" class="btn btn-primary" style="float:right;">Tambah Pengaduan</a>
-      </div>
+      <?php if ($row['rule'] === 'Masyarakat') { ?>
+        <div class="col-md-12 text-right">
+          <a href="index.php?page=complaint-create" class="btn btn-primary" style="float:right;">Tambah Pengaduan</a>
+        </div>
+      <?php } ?>
     </div>
     <table class="table table-hover">
       <thead>
@@ -45,7 +47,7 @@
               foreach ($complaint as $complaint){
           ?>
           <tr>
-            <td><?php echo $complaint['customer_name'] ?></td>
+            <td><?php echo $complaint['user_name'] ?></td>
             <td><img src="<?php echo $complaint['foto'] ?>" width="35" height="40" style="border-radius:50%;" data-toggle="modal"></td>
             <td><?php echo $complaint['description'] ?></td>
             <td>
@@ -53,6 +55,9 @@
                 <span class="text-primary" style="font-weight: bold;"><?php echo $complaint['status']; ?></span>
               <?php } elseif ($complaint['status'] === 'Sedang Diproses') { ?>
                 <span class="text-warning" style="font-weight: bold;"><?php echo $complaint['status']; ?></span>
+              <?php }  else { ?>
+                <?php echo $complaint['status'] !== 'Selesai' ?>
+                <span style="font-weight: bold; color:green;"><?php echo $complaint['status']; ?></span>
               <?php } ?>
             </td>
             <td><?php echo $complaint['date'] ?></td>
@@ -60,8 +65,10 @@
               <a href="index.php?page=complaint-detail&detailId=<?php echo $complaint['id'] ?>">
                 <i class="fa fa-info" aria-hidden="true" style="padding-left:1px;"></i>
               </a>
-              <a href="index.php?page=complaint-update&editId=<?php echo $complaint['id'] ?>" style="color:green">
-              <i class="fa fa-pencil" aria-hidden="true"></i></a>
+              <?php if ($row['rule'] === 'Masyarakat') { ?>
+                <a href="index.php?page=complaint-update&editId=<?php echo $complaint['id'] ?>" style="color:green">
+                <i class="fa fa-pencil" aria-hidden="true"></i></a>
+              <?php } ?>
               <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $complaint['id'] ?>" style="color:white">
                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
               </a>

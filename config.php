@@ -56,6 +56,14 @@ switch($page){
         $responObj->insertData($_POST);
     }
   break;
+  case 'respon-delete': // $page == home (jika isi dari $page adalah home)
+    include 'app/Controller/respon.php';
+    $customerObj = new respon();
+    if(isset($_POST['deleteId']) && !empty($_POST['deleteId'])) {
+        $deleteId = $_POST['deleteId'];
+        $customerObj->deleteRecord($deleteId);
+    }
+  break;
   case 'Respons': // $page == home (jika isi dari $page adalah home)
     include "Respons/index.php"; // load file home.php yang ada di folder views
   break;

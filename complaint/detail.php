@@ -21,49 +21,54 @@
 </div><br><br> 
 
 <div class="container">
-  <div class="card p-5">
-    <?php if ($complaint['status'] !== 'Selesai') { ?>
-    <div class="row mb-3">
-      <div class="col-md-12 text-right">
-        <a href="index.php?page=complaint-finish&complaint_id=<?php echo $complaint['id'] ?>" class="btn btn-success">
-          <i class="fa fa-check"></i> Selesaikan Pengaduan
-        </a>
+    <div class="card p-5">
+      <?php if ($complaint['status'] !== 'Selesai') { ?>
+      <div class="row mb-3">
+        <div class="col-md-12 text-right">
+          <a href="index.php?page=complaint-finish&complaint_id=<?php echo $complaint['id'] ?>" class="btn btn-success">
+            <i class="fa fa-check"></i> Selesaikan Pengaduan
+          </a>
+        </div>
       </div>
+      <table class="table table-hover">
+        <tbody>
+            <?php 
+              if (!is_null($complaint)) {
+            ?>
+            <tr>
+              <th>Pengaduan</th>
+              <td><?php echo $complaint['user_name'] ?></td>
+            </tr>
+            <tr>
+              <th>Deskripsi</th>
+              <td><?php echo $complaint['description'] ?></td>
+            </tr>
+            <tr>
+              <th>Bukti Pengaduan</th>
+              <td><img src="<?php echo $complaint['foto'] ?>" width="228" height="161"></td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td>
+                <?php if ($complaint['status'] === 'Baru') { ?>
+                  <span class="text-primary" style="font-weight: bold;"><?php echo $complaint['status']; ?></span>
+                <?php } elseif ($complaint['status'] === 'Sedang Diproses') { ?>
+                  <span class="text-warning" style="font-weight: bold;"><?php echo $complaint['status']; ?></span>
+                <?php }  else { ?>
+                  <?php echo $complaint['status'] !== 'Selesai' ?>
+                  <span style="font-weight: bold; color: green;"><?php echo $complaint['status']; ?></span>
+                <?php } ?>
+              </td>
+            </tr>
+          <?php } else { ?>
+            <tr>
+              <td colspan="8">Tidak ada untuk saat ini.</td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
     </div>
-    <?php } ?>
-    <table class="table table-hover">
-      <tbody>
-          <?php 
-            if (!is_null($complaint)) {
-          ?>
-          <tr>
-            <th>Pengaduan</th>
-            <td><?php echo $complaint['customer_name'] ?></td>
-          </tr>
-          <tr>
-            <th>Deskripsi</th>
-            <td><?php echo $complaint['description'] ?></td>
-          </tr>
-          <tr>
-            <th>Bukti Pengaduan</th>
-            <td><img src="<?php echo $complaint['foto'] ?>" width="228" height="161"></td>
-          </tr>
-          <tr>
-            <th>Status</th>
-            <td>
-              <?php if ($complaint['status'] === 'Baru') { ?>
-                <span class="text-primary" style="font-weight: bold;"><?php echo $complaint['status']; ?></span>
-              <?php } ?>
-            </td>
-          </tr>
-        <?php } else { ?>
-          <tr>
-            <td colspan="8">Tidak ada untuk saat ini.</td>
-          </tr>
-        <?php } ?>
-      </tbody>
-    </table>
-  </div>
+  <?php } ?>
    <?php if($row['rule'] === 'Admin' || $row['rule'] === 'Petugas'){?>
   <div class="card mt-5">
     <div class="row p-3">
@@ -84,6 +89,7 @@
           <th>Perespon</th>
           <th>Deskripsi</th>
           <th>Tanggal</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -93,12 +99,43 @@
             foreach ($respon as $respon){
       ?>
           <tr>
-            <td><?php echo $respon['customer_name'] ?></td>
+            <td><?php echo $respon['user_name'] ?></td>
             <td><?php echo $respon['description'] ?></td>
             <td><?php echo date("Y-M-d"); ?></td>
+            <td>
+              <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $complaint['id'] ?>" style="color:white">
+                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+              </a>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal<?php echo $complaint['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Hapus Complaint</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="index.php?page=respon-delete" method="POST">
+                        <input type="hidden" value="<?php echo $complaint['id'] ?>" name="deleteId">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
           </tr>
-        <?php } ?>
-        <?php } else { ?>
+          <?php } ?>
+          <?php } else { ?>
           <tr>
             <td colspan="8">Tidak ada untuk saat ini.</td>
           </tr>
@@ -119,7 +156,7 @@
       </div>
       <div class="modal-body">
         <form action="index.php?page=complaint-response&responId" method="POST">
-          <input type="hidden" value="<?php echo $complaint['customer_id']; ?>" name="customer_id">
+          <input type="hidden" value="<?php echo $complaint['user_id']; ?>" name="user_id">
           <input type="hidden" value="<?php echo $complaint['id']; ?>" name="complaint_id">
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Laporan</label>

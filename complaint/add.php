@@ -17,7 +17,7 @@
 </div><br> 
 <div class="container">
   <form action="index.php?page=complaint-create" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="custumers_id" value="<?php echo $row['id']?>" >
+    <input type="hidden" name="user_id" value="<?php echo $row['id']?>" >
     <div class="mb-3">
       <label for="formFileMultiple" class="form-label">Masukkan Bukti</label>
       <input class="form-control" type="file" name="foto" multiple>

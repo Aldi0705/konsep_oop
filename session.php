@@ -3,7 +3,7 @@
    $localhost = 'localhost';
    $username = 'root';
    $password = '';
-   $database = 'penjualan';
+   $database = 'pengaduan_masyarakat';
    $koneksi = mysqli_connect($localhost,$username,$password,$database);
 
    // Check connection
@@ -14,7 +14,7 @@
 
    $user_check = $_SESSION['login_user'];
    
-   $ses_sql = mysqli_query($koneksi,"select * from customers where email = '$user_check' ");
+   $ses_sql = mysqli_query($koneksi,"select * from user where email = '$user_check' ");
    
    $row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
    

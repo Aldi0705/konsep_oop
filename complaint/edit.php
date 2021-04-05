@@ -27,11 +27,12 @@
 
 <div class="container">
   <form action="index.php?page=complaint-update" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="custumers_id" value="<?php echo $row['id']?>" >
     <img src="<?php echo $complaint['foto'] ?>" width="250" height="150">
     <div class="form-group">
       <label for="foto">Masukkan bukti:</label>
       <input class="form-control" type="file" name="foto" multiple >
-      <input type="hidden" name="custumer_id" value="<?php echo $row['id']?>" >
+      <input type="hidden" name="user_id" value="<?php echo $row['id']?>" >
       <input type="hidden" name="id" value="<?php echo $_GET['editId']?>" >
     </div>
     <div class="mb-3">

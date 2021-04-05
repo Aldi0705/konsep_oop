@@ -5,7 +5,7 @@
 		private $servername = "localhost";
 		private $username   = "root";
 		private $password   = "";
-		private $database   = "penjualan";
+		private $database   = "pengaduan_masyarakat";
 		public  $con;
 
 
@@ -26,14 +26,14 @@
 		// Insert customer data into customer table
 		public function insertData($post)
 		{
-			$customer_id = $this->con->real_escape_string($_POST['customer_id']);
+			$user_id = $this->con->real_escape_string($_POST['user_id']);
 			$complaint_id = $this->con->real_escape_string($_POST['complaint_id']);
 			$target_dir = "assets/uploads/";
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			
-			$query="INSERT INTO respons(custumers_id, complaint_id,description) VALUES('$customer_id','$complaint_id','$description')";
+			$query="INSERT INTO respon (user_id, complaint_id,description) VALUES('$user_id','$complaint_id','$description')";
 			$queryComplaint = "UPDATE complaint SET status = 'Sedang Diproses' where id = $complaint_id";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
@@ -50,12 +50,12 @@
 			}
 		}
 
-		// Fetch customer records for show listing
-		public function displayData($customer_id = null)
+		// Fetch user records for show listing
+		public function displayData($user_id = null)
 		{
-			$query = "SELECT c.name as customer_name, c.id as customer_id, cs.foto as complaint_foto, cs.description as complaint_description, rs.* FROM respons rs Join complaint cs on rs.complaint_id = cs.id Join customers c on rs.custumers_id = c.id";
-		    if (!is_null($customer_id)) {
-				$query = $query . " where rs.complaint_id = " . $customer_id;
+			$query = "SELECT c.name as user_name, c.id as user_id, cs.foto as complaint_foto, cs.description as complaint_description, rs.* FROM respon rs Join complaint cs on rs.complaint_id = cs.id Join user c on rs.user_id = c.id";
+		    if (!is_null($user_id)) {
+				$query = $query . " where rs.complaint_id = " . $user_id;
 			}
 		    $result = $this->con->query($query);
 			if ($result->num_rows > 0) {
@@ -89,10 +89,10 @@
 			$description = $this->con->real_escape_string($_POST['description']);
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-			$custumer_id = $_POST['custumer_id'];
+			$user_id = $_POST['user_id'];
 			$id = $_POST['id'];
 			
-			$query="UPDATE complaint SET foto = '$target_file', custumers_id = '$custumer_id' WHERE id = '$id'";
+			$query="UPDATE complaint SET foto = '$target_file', user_id = '$user_id' WHERE id = '$id'";
 			$check = getimagesize($_FILES["foto"]["tmp_name"]);
 			$sql = $this->con->query($query) or die(mysqli_error($this->con).$query);
 			if ($sql==true) {

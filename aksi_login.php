@@ -3,7 +3,7 @@
     $localhost = 'localhost';
     $username = 'root';
     $password = '';
-    $database = 'penjualan';
+    $database = 'pengaduan_masyarakat';
     $koneksi = mysqli_connect($localhost,$username,$password,$database);
 
     // Check connection
@@ -18,7 +18,7 @@
        $myusername = mysqli_real_escape_string($koneksi,$_POST['email']);
        $mypassword = mysqli_real_escape_string($koneksi,md5($_POST['password'])); 
        
-       $sql = "SELECT id FROM customers WHERE email = '$myusername' and password = '$mypassword'";
+       $sql = "SELECT id FROM user WHERE email = '$myusername' and password = '$mypassword'";
        $result = mysqli_query($koneksi,$sql);
       //  $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       //  $active = $row['active'];
